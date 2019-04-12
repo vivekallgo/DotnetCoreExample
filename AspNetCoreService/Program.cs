@@ -22,7 +22,7 @@ namespace SampleApp
             if (isService)
             {
                 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
-                var pathToContentRoot = Path.GetDirectoryName(pathToExe);
+                var pathToContentRoot = Path.GetDirectoryName(@"C:\ProgramData\AllGoVision");
                 Directory.SetCurrentDirectory(pathToContentRoot);
             }
 

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using System.IO;
+using System.Diagnostics;
 namespace SampleApp.Controllers
 {
     [Route("api/[controller]")]
@@ -14,7 +15,18 @@ namespace SampleApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            string folder = @"C:/Program Files (x86)/AllGoVision Technologies/AllGoVision/";
+            string fileName = @"C:/Program Files (x86)/AllGoVision Technologies/AllGoVision/AllGoVisionAnalytics.exe";
+            Console.WriteLine(folder);
+            if (Directory.Exists(folder))
+            {
+                FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(fileName);
+                return new string[] { myFileVersionInfo.FileDescription, myFileVersionInfo.FileVersion,myFileVersionInfo.ProductVersion,myFileVersionInfo. };
+            }
+            else
+            {
+                return new string[] { "File not found." };
+            }
         }
 
         // GET api/values/5

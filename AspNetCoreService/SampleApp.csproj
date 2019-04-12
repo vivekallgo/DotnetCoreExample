@@ -13,7 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
-    <PackageReference Include="Soukoku.Extensions.FileProviders.Zip" Version="1.1.3" />
+    <!-- <PackageReference Include="Soukoku.Extensions.FileProviders.Zip" Version="1.1.3" /> -->
   </ItemGroup>
 
 </Project>

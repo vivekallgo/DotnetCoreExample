@@ -11,7 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.FileProviders;
+using System.IO;
+/*
 using Soukoku.Extensions.FileProviders;
+*/
 
 namespace SampleApp
 {
@@ -30,19 +33,24 @@ namespace SampleApp
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            string staticFileDirectory = @"C:/ProgramData/AllGoVision";
+            Console.WriteLine(staticFileDirectory);
+            /*
+                    var zipProvider = new ZipFileProvider(@"C:\ProgramData\AllGoVision");
 
-            var zipProvider = new ZipFileProvider(@"C:\\Users\\vivek\\Desktop\\DLI_Build_27Feb.zip");
+                    app.UseFileServer(new FileServerOptions()
+                    {
+                        FileProvider = zipProvider,
+                        RequestPath = "/api/test", // optional
+                        EnableDirectoryBrowsing = true
+                    });
 
-            app.UseFileServer(new FileServerOptions()
-            {
-                FileProvider = zipProvider,
-                RequestPath = "/api/test", // optional
-                EnableDirectoryBrowsing = true
-            });
-
+                    .Configure(appbuilder => appbuilder.UseFileServer(true).Build())
+         */
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -53,6 +61,16 @@ namespace SampleApp
                 app.UseHsts();
             }
             app.UseStaticFiles();
+            if (Directory.Exists(staticFileDirectory))
+            {
+                app.UseFileServer(new FileServerOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                       staticFileDirectory),
+                    RequestPath = "/files",
+                    EnableDirectoryBrowsing = true
+                });
+            }
             //app.UseHttpsRedirection();
             app.UseMvc();
         }

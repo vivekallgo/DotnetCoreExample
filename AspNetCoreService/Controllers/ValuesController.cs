@@ -15,13 +15,16 @@ namespace SampleApp.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            string folder = @"C:/Program Files (x86)/AllGoVision Technologies/AllGoVision/";
-            string fileName = @"C:/Program Files (x86)/AllGoVision Technologies/AllGoVision/AllGoVisionAnalytics.exe";
-            Console.WriteLine(folder);
+            string folder = @"C:/Users/vivek/Desktop/V1";
+            string fileName = @"C:/Users/vivek/Desktop/V1/listener.exe";           
+
             if (Directory.Exists(folder))
             {
+                string FileDescription = "FileDescription" + myFileVersionInfo.FileDescription;
+                string FileVersion = "FileVersion" + FileVersionmyFileVersionInfo.FileVersion;
+                string ProductVersion = "ProductVersion" + ProductVersionmyFileVersionInfo.ProductVersion;
                 FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(fileName);
-                return new string[] { myFileVersionInfo.FileDescription, myFileVersionInfo.FileVersion,myFileVersionInfo.ProductVersion,myFileVersionInfo. };
+                return new string[] { FileDescription, FileVersion,ProductVersion,ProductVersion };
             }
             else
             {
